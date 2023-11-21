@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 const productsRouter = require('./Routes/Product');
 const brandRouter = require('./Routes/Brand');
 const categorytRouter=require('./Routes/Category');
+const authRouter=require('./Routes/Auth');
+const usersRouter=require('./Routes/User');
+const cartRouter=require('./Routes/Cart');
+const orderRouter=require('./Routes/Order')
 const Route = express.Router();
 const cors = require('cors')
 server.use(cors({
@@ -15,9 +19,11 @@ server.use(express.json()); // to parse req.body
 main().catch(err=> console.log(err));
 server.use('/products', productsRouter);
 server.use('/brands', brandRouter);
-server.use('/category', categorytRouter);
-// server.post("./products",createProduct)
-// server.use("/products",productApi)
+server.use('/categories', categorytRouter);
+server.use('/auth', authRouter);
+server.use('/users', usersRouter);
+server.use('/cart',cartRouter)
+server.use("/orders",orderRouter)
 
 async function main(){
     await mongoose.connect('mongodb://127.0.0.1:27017/ecommerceDB');
